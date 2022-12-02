@@ -6,6 +6,11 @@ if branch == "master" || branch >= "v2.0"
   gem "rails-controller-testing", group: :test
 end
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  "https://github.com/#{repo_name}.git"
+end
+
 if branch == 'master' || branch >= "v2.3"
   gem 'rails', '~> 5.1.0' # HACK: broken bundler dependency resolution
 elsif branch >= "v2.0"

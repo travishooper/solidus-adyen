@@ -84,11 +84,12 @@ module Spree
       def handle_normal_event
         # Payment may not have psp_reference. Add this from notification if it
         # doesn't have one.
+        puts "before payment.state == #{payment.state}"
         unless self.payment.response_code
           payment.response_code = notification.psp_reference
           payment.save
         end
-
+        puts "after payment.state == #{payment.state}"
         if notification.auto_captured?
           complete_payment!
 
